@@ -8,13 +8,15 @@ const connectDB = async () => {
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     });
-    console.log('Mongodb connected...');
+
+    console.log('mongo db connected');
   } catch (err) {
     console.error(err.message);
-    // <xit process on failure
-    proccess.exit(1);
+    process.exit(1);
   }
 };
+//"mongoURI": "mongodb://localhost:27017"
 
 module.exports = connectDB;
