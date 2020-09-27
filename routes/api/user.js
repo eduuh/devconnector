@@ -5,9 +5,11 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 
 const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
-// @route    GET api/user
-// @desc     Test route
+// @route    GET api/users
+// @desc     Authenticate user and get token
 // @accecc   Public
 router.get('/', (req, res) => {
   res.send('user route');
@@ -56,9 +58,22 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
       await user.save();
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
       //Return jsonwebtoken
-      //console.log(req.body);
-      res.json('user registered');
+      jwt.sign(
+        payload,
+        config.get('JwtSecret'),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.log(err.message);
       res.status(500).send('server error');

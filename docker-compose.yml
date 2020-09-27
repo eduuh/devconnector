@@ -1,0 +1,19 @@
+version: "2.4"
+
+services:
+  api:
+    container_name: api
+    init: true
+    command: nodemon 
+    build:
+      context: .
+      target: dev
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    volumes:
+      - ./mng-node:/app
+    depends_on:
+      mongo:
+        condition: service_healthy
+

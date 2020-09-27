@@ -2,10 +2,12 @@
   "name": "devconnector",
   "version": "1.0.0",
   "description": "Social network for developers",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix clients",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Muraya Kamau",
   "license": "MIT",
@@ -22,7 +24,6 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "eslint": "^7.5.0",
     "nodemon": "^2.0.4"
   }
 }

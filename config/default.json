@@ -1,3 +1,7 @@
 {
-  "mongoURI": "mongodb://localhost:27017"
+"mongoURI":"mongodb+srv://edwin:edwn@devconnector.aslmt.mongodb.net/devconnector?retryWrites=true&w=majority",
+"mongoURI2":"mongodb://127.0.0.1:27017",
+"JwtSecret": "mysecretToken"
 }
+
+
