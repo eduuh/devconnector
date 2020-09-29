@@ -7,13 +7,18 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const  Protect = require('../../middleware/auth')
 
 // @route    GET api/users
 // @desc     Authenticate user and get token
 // @accecc   Public
-router.get('/', (req, res) => {
-  res.send('user route');
-});
+
+
+router.get('/me',Protect, (req,res)=> {
+ console.log(req.user);
+
+ res.json(req.user);
+})
 
 router.post(
   '/',
